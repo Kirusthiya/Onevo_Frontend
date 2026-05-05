@@ -1,0 +1,65 @@
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: #f8fafc;
+  padding: 0.5rem; /* Outer padding */
+  gap: 0.5rem; /* Gap between header and body */
+}
+
+/* Adjust the existing Navigation to not be fixed, but a flex child */
+.main-header {
+  position: static !important; /* Overriding fixed positioning for layout */
+  height: auto !important;
+}
+
+.layout-body {
+  flex: 1;
+  display: flex;
+  gap: 0.5rem; /* Gap between Sidebar and BodyContainer */
+  overflow: hidden;
+}
+
+.main-sidebar {
+  flex: 0 0 15%; /* Matching Workplace Nav (15%) */
+  display: flex;
+  flex-direction: column;
+}
+
+.body-container {
+  flex: 0 0 85%; /* Matching Main Nav (85%) */
+  display: flex;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.content-viewport {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* Scrollbar styling for a premium feel */
+.content-viewport::-webkit-scrollbar {
+  width: 6px;
+}
+
+.content-viewport::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.content-viewport::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.1);
+  border-radius: 10px;
+}
+
+.content-viewport::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 23, 42, 0.2);
+}
