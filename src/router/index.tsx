@@ -1,4 +1,4 @@
-import { useRoutes, Navigate } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
 import { authRoutes } from './auth.routes';
 import { dashboardRoutes } from './dashboard.routes';
 import { errorRoutes } from './error.routes';
@@ -8,11 +8,17 @@ export const AppRouter = () => {
   return useRoutes([
     {
       path: '/',
-      children: dashboardRoutes,
+      children: [
+        ...dashboardRoutes,
+        { path: '*', element: <NotFound /> }
+      ],
     },
     {
       path: '/auth',
-      children: authRoutes,
+      children: [
+        ...authRoutes,
+        { path: '*', element: <NotFound /> }
+      ],
     },
     ...errorRoutes,
     {
