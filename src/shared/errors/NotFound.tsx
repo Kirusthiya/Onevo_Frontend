@@ -9,8 +9,7 @@ const NotFound: React.FC = () => {
     <div className="error-page-container">
       <div className="error-card">
         <div className="error-header">
-          <div className="logo-placeholder">✦ Muin</div>
-          <Link to="/login" className="login-btn">Log In</Link>
+       
         </div>
 
         <div className="error-content">
