@@ -10,9 +10,9 @@
   width: 44px;
   height: 44px;
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   background: transparent;
-  color: #94a3b8;
+  color: #64748b;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,17 +22,21 @@
 }
 
 .sub-sidebar-button:hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
   border-color: rgba(255, 255, 255, 0.15);
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
 .sub-sidebar-button.active {
   background: #ffffff;
   color: #020617;
   border: none;
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15);
+}
+
+.sub-sidebar-button.active:hover {
+  transform: scale(1.04);
 }
 
 .sub-button-icon {
@@ -41,27 +45,36 @@
   justify-content: center;
 }
 
-/* Tooltip style */
-.sub-button-tooltip {
-  position: absolute;
-  left: calc(100% + 12px);
-  background: #020617;
-  color: #ffffff;
-  padding: 6px 12px;
+/* ── Portal Tooltip ──
+   Rendered at document.body with position:fixed.
+   position:fixed is relative to the viewport, so it is NEVER
+   clipped by any parent element's overflow:hidden.
+*/
+.sub-button-tooltip-portal {
+  position: fixed;           /* viewport-relative, escapes all overflow */
+  transform: translateY(-50%);
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 5px 12px;
   border-radius: 8px;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 600;
   white-space: nowrap;
   pointer-events: none;
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: all 0.2s ease;
-  z-index: 100;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 9999;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  letter-spacing: 0.01em;
+  animation: tooltipSlideIn 0.14s ease forwards;
 }
 
-.sub-button-container:hover .sub-button-tooltip {
-  opacity: 1;
-  transform: translateX(0);
+@keyframes tooltipSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
 }

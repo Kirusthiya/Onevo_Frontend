@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   Home, 
   MessageSquare, 
@@ -15,7 +16,8 @@ import { useNavigationStore } from '../../stores/ui/use-navigation-store';
 import './Sidebar.css';
 
 const Sidebar: React.FC = () => {
-  const { activeMainItem, setActiveMainItem } = useNavigationStore();
+  const { activeMainItem, setActiveMainItem, setActiveSubItem } = useNavigationStore();
+  const navigate = useNavigate();
 
   const menuItems = [
     { icon: <Home size={20} />, label: 'Home', id: 'home' },
@@ -29,6 +31,31 @@ const Sidebar: React.FC = () => {
     { icon: <Settings size={20} />, label: 'Settings', id: 'settings' },
   ];
 
+  const handleNavigation = (id: string) => {
+    setActiveMainItem(id);
+    
+    // Default sub-paths and sub-items for main menu items
+    const defaults: Record<string, { path: string; subItem: string }> = {
+      home: { path: '/home', subItem: '' },
+      chat: { path: '/chat', subItem: '' },
+      inbox: { path: '/inbox', subItem: '' },
+      people: { path: '/people/employees', subItem: 'Employees' },
+      workforce: { path: '/workforce/presence', subItem: 'Presence' },
+      org: { path: '/org/orgchart', subItem: 'Org Chart' },
+      calendar: { path: '/calendar/calendar', subItem: 'Calendar' },
+      admin: { path: '/admin/peopleaccess', subItem: 'People Access' },
+      settings: { path: '/settings/general', subItem: 'General' }
+    };
+
+    const config = defaults[id] || { path: `/${id}`, subItem: '' };
+    
+    if (config.subItem) {
+      setActiveSubItem(config.subItem);
+    }
+    
+    navigate(config.path);
+  };
+
   return (
     <aside className="main-sidebar">
       <div className="sidebar-inner">
@@ -39,7 +66,7 @@ const Sidebar: React.FC = () => {
               icon={item.icon}
               label={item.label}
               active={activeMainItem === item.id}
-              onClick={() => setActiveMainItem(item.id)}
+              onClick={() => handleNavigation(item.id)}
             />
           ))}
         </div>

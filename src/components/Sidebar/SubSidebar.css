@@ -6,6 +6,18 @@
   padding: 1.5rem 0.5rem;
   background: #020617; /* Dark background matching the image */
   align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar for sub-sidebar but allow scrolling */
+.sub-sidebar::-webkit-scrollbar {
+  width: 2px;
+}
+
+.sub-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
 }
 
 .sub-sidebar-menu {

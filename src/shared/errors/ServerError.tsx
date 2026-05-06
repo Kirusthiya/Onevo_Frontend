@@ -13,7 +13,7 @@ const ServerError: React.FC = () => {
     <div className="error-page-container server-error">
       <div className="error-card">
         <div className="error-header">
-          <div className="logo-placeholder">✦ Muin</div>
+          <div className="logo-placeholder">✦ ONEVO</div>
           <Link to="/login" className="login-btn">Log In</Link>
         </div>
 

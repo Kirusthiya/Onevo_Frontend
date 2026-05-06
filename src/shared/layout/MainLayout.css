@@ -52,12 +52,44 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
+/* ── Sub Sidebar with Keyframe Animations ── */
 .body-sub-sidebar {
   display: flex;
   background: #020617;
   overflow: visible;
   z-index: 50;
-  flex-shrink: 0; /* Prevent shrinking during animation */
+  flex-shrink: 0;
+  width: 64px;
+}
+
+.sub-sidebar-enter {
+  animation: subSidebarSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.sub-sidebar-exit {
+  animation: subSidebarSlideOut 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes subSidebarSlideIn {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 64px;
+    opacity: 1;
+  }
+}
+
+@keyframes subSidebarSlideOut {
+  from {
+    width: 64px;
+    opacity: 1;
+  }
+  to {
+    width: 0;
+    opacity: 0;
+  }
 }
 
 .content-area {

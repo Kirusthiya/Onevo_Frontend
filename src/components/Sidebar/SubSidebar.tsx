@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   UserRound, CalendarX, UserCheck, Folder, Briefcase, 
   Layout, Target, FileText, Clock, BarChart3, 
@@ -13,6 +14,7 @@ import './SubSidebar.css';
 
 const SubSidebar: React.FC = () => {
   const { activeMainItem, activeSubItem, setActiveSubItem } = useNavigationStore();
+  const navigate = useNavigate();
 
   const subMenus: Record<string, { label: string; icon: React.ReactNode }[]> = {
     people: [
@@ -61,6 +63,16 @@ const SubSidebar: React.FC = () => {
     ],
   };
 
+  const handleSubNavigation = (label: string) => {
+    setActiveSubItem(label);
+    
+    // Normalize label to path (e.g., "My Work" -> "mywork")
+    const pathSlug = label.toLowerCase().replace(/\s+/g, '').replace(/&/g, '');
+    const targetPath = `/${activeMainItem}/${pathSlug}`;
+    
+    navigate(targetPath);
+  };
+
   const currentItems = subMenus[activeMainItem] || [];
 
   if (currentItems.length === 0) return null;
@@ -74,7 +86,7 @@ const SubSidebar: React.FC = () => {
             label={item.label}
             icon={item.icon}
             active={activeSubItem === item.label}
-            onClick={() => setActiveSubItem(item.label)}
+            onClick={() => handleSubNavigation(item.label)}
           />
         ))}
       </div>
